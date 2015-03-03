@@ -21,3 +21,9 @@ RUN mkdir -p ${THIRDPARTY_DIR}/seqtk && cd ${THIRDPARTY_DIR}/seqtk &&\
     wget --quiet --no-check-certificate ${SEQTK} --output-document - |\
     tar xzf - --directory . --strip-components=1 && \
     make
+
+# COMPILE HELLO_WORLD
+
+RUN gcc hello_world.c -o ${INSTALL_DIR}/helloworld
+
+# define an entry point...
