@@ -1,31 +1,23 @@
 FROM debian:wheezy
 MAINTAINER Foo Bar, foo@bar.com
 
-ENV PACKAGES wget binutils make csh g++ sed gawk zlib1g-dev
+ENV ORG foo
+ENV APP bar
+ENV INSTALL_DIR /opt/${ORG}/${APP}
+
+ENV PACKAGES wget binutils make csh g++ sed gawk perl zlib1g-dev 
 RUN apt-get update -y && apt-get install -y --no-install-recommends ${PACKAGES}
 
-ENV HTSLIB https://github.com/samtools/htslib/archive/1.2.tar.gz
-ENV BCFTOOLS https://github.com/samtools/bcftools/archive/1.2.tar.gz
+ENV SEQTK https://github.com/avilella/seqtk/archive/sgdp.tar.gz
 
-ENV THIRDPARTY_DIR /opt/bioboxes/toolkit/thirdparty
+ENV THIRDPARTY_DIR ${INSTALL_DIR}/thirdparty
 
 RUN mkdir -p ${THIRDPARTY_DIR}
 RUN cd ${THIRDPARTY_DIR}
 
-# HTSLIB
+# SEQTK
 
-RUN cd ${THIRDPARTY_DIR} &&\
-    wget --quiet --no-check-certificate ${HTSLIB} --output-document - |\
-    tar xzf - --directory htslib --strip-components=1 && \
-    cd htslib && \
-    make install
-
-# BCFTOOLS
-
-RUN cd ${THIRDPARTY_DIR} &&\
-    wget --quiet --no-check-certificate ${BCFTOOLS} --output-document - |\
-    tar xzf - --directory bcftools --strip-components=1 && \
-    cd bcftools && \
-    make install
-
-# ENTRYPOINT ["run"]
+RUN mkdir -p ${THIRDPARTY_DIR}/seqtk && cd ${THIRDPARTY_DIR}/seqtk &&\
+    wget --quiet --no-check-certificate ${SEQTK} --output-document - |\
+    tar xzf - --directory . --strip-components=1 && \
+    make
