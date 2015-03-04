@@ -24,6 +24,10 @@ RUN mkdir -p ${THIRDPARTY_DIR}/seqtk && cd ${THIRDPARTY_DIR}/seqtk &&\
 
 # COMPILE HELLO_WORLD
 
-RUN gcc hello_world.c -o ${INSTALL_DIR}/helloworld
+ADD src/hello_world.c ${INSTALL_DIR}/hello_world.c
 
-# define an entry point...
+RUN gcc ${INSTALL_DIR}/hello_world.c -o ${INSTALL_DIR}/hello_world
+
+WORKDIR ${INSTALL_DIR}
+ENTRYPOINT ["./hello_world"]
+
