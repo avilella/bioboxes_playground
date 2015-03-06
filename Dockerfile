@@ -35,4 +35,4 @@ ADD scripts/ ${INSTALL_DIR}/scripts
 
 WORKDIR ${INSTALL_DIR}
 # ENTRYPOINT ["./hello_world"]
-ENTRYPOINT ["./scripts/run_binary.pl"]
+ENTRYPOINT ["./scripts/run_binary.pl -i ./bin/hello_world"]
