@@ -2,6 +2,6 @@
 use strict;
 use warnings;
 
-print `../src/hello_world`;
+print `./bin/hello_world`;
 
 1;
