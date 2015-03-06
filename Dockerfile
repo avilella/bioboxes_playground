@@ -24,9 +24,12 @@ RUN mkdir -p ${THIRDPARTY_DIR}/seqtk && cd ${THIRDPARTY_DIR}/seqtk &&\
 
 # COMPILE HELLO_WORLD
 
-ADD src/hello_world.c ${INSTALL_DIR}/hello_world.c
+# ADD src/hello_world.c ${INSTALL_DIR}/hello_world.c
 
-RUN gcc ${INSTALL_DIR}/hello_world.c -o ${INSTALL_DIR}/hello_world
+ADD src/ ${INSTALL_DIR}/src
+
+RUN mkdir ${INSTALL_DIR}/bin &&\
+    gcc ${INSTALL_DIR}/src/hello_world.c -o ${INSTALL_DIR}/bin/hello_world
 
 ADD scripts/ ${INSTALL_DIR}/scripts
 
