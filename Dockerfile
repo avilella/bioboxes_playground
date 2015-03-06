@@ -28,6 +28,8 @@ ADD src/hello_world.c ${INSTALL_DIR}/hello_world.c
 
 RUN gcc ${INSTALL_DIR}/hello_world.c -o ${INSTALL_DIR}/hello_world
 
-WORKDIR ${INSTALL_DIR}
-ENTRYPOINT ["./hello_world"]
+ADD scripts/ ${INSTALL_DIR}/scripts
 
+WORKDIR ${INSTALL_DIR}
+# ENTRYPOINT ["./hello_world"]
+ENTRYPOINT ["./scripts/run_binary.pl"]
